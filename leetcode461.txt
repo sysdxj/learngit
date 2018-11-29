@@ -1,0 +1,50 @@
+# 461. 汉明距离
+# 题目描述提示帮助提交记录社区讨论阅读解答
+# 随机一题
+# 两个整数之间的汉明距离指的是这两个数字对应二进制位不同的位置的数目。
+# 
+# 给出两个整数 x 和 y，计算它们之间的汉明距离。
+# 
+# 注意：
+# 0 ≤ x, y < 231.
+# 
+# 示例:
+# 
+# 输入: x = 1, y = 4
+# 
+# 输出: 2
+# 
+# 解释:
+# 1   (0 0 0 1)
+# 4   (0 1 0 0)
+#        ↑   ↑
+# 
+# 上面的箭头指出了对应二进制位不同的位置。
+
+
+class Solution:
+    def hammingDistance(self, x, y):
+        """
+        :type x: int
+        :type y: int
+        :rtype: int
+        """
+        count = 0
+        #10进制转换为二进制使用bin()函数，但返回的前面有'0b',需要去掉
+        str1 = bin(x).lstrip('0b')
+        #str1 = bin(x).split('0b')[1]
+        str2 = bin(y).lstrip('0b')
+
+        #将两个二进制数补齐，不足的前面补0
+        if len(str1) >= len(str2):   #x大
+            str2 =  '0'*(len(str1)-len(str2)) + str2
+        else:   #y大
+            str1 =  '0'*(len(str2)-len(str1)) + str1
+
+        for i in range(0,len(str1)):
+            if str1[i] != str2[i]:
+                count += 1
+        return count
+
+a = Solution()
+print(a.hammingDistance(4, 1))
