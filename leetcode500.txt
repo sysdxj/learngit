@@ -1,0 +1,58 @@
+# 500.
+# 键盘行
+# 题目描述提示帮助提交记录社区讨论阅读解答
+# 随机一题
+# 给定一个单词列表，只返回可以使用在键盘同一行的字母打印出来的单词。键盘如下图所示。
+#
+# American
+# keyboard
+#
+# 示例：
+#
+# 输入: ["Hello", "Alaska", "Dad", "Peace"]
+# 输出: ["Alaska", "Dad"]
+#
+# 注意：
+#
+# 你可以重复使用键盘上同一字符。
+# 你可以假设输入的字符串将只包含字母。
+
+class Solution:
+    row1 = 'qwertyuiop'
+    row2 = 'asdfghjkl'
+    row3 = 'zxcvbnm'
+
+    def findWords(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+        res = []
+        for word in words:
+            if self.is_in_onerow(word.lower()):
+                res.append(word)
+        return res
+
+    # 判断输入列表里的单词是否在键盘同一行
+    def is_in_onerow(self, word):
+        if word[0] in self.row1:
+            for char in word:
+                if char not in self.row1:
+                    return False
+            return True
+			
+			#如果有字母不在同一行，则return False结束此函数，如果运行完for char in word一直没有运行下面的if部分，表明字母都在同一行，
+			#此时返回一个True
+        elif word[0] in self.row2:
+            for char in word:
+                if char not in self.row2:
+                    return False
+            return True
+        if word[0] in self.row3:
+            for char in word:
+                if char not in self.row3:
+                    return False
+            return True
+
+a = Solution()
+print(a.findWords(["Hello", "Alaska", "Dad", "Peace"]))
